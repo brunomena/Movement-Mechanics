@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEditor.Tilemaps;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,12 +12,13 @@ public class PlayerController : MonoBehaviour
     public Grid testGrid;
     public Tilemap tileMap;
     public TileBase yellowTile;
+    GameObjectBrush brush;
 
     // Start is called before the first frame update
     void Start()
     {
         movePoint.parent = null;
-
+        
     }
 
     // Update is called once per frame
