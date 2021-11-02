@@ -1,28 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEditor.Tilemaps;
-
+using CodeMonkey.Utils;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
     public Transform movePoint;
-    public Grid testGrid;
-    public Tilemap tileMap;
-    public TileBase yellowTile;
-    GameObjectBrush brush;
+    private Vector3 originOffSet;
+
+    private Grid grid;
 
     // Start is called before the first frame update
     void Start()
     {
         movePoint.parent = null;
-        
+        originOffSet = new Vector3(-1.5f,-0.5f,-1.5f) + transform.position;
+        grid = new Grid(3, 3, 1f, originOffSet);
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+    }
+
+    private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
@@ -30,13 +33,15 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
-                movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"),0f,0f);
-                tileMap.SetColor(Vector3Int.FloorToInt(transform.position), Color.yellow);
+                
+                movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                grid.MoveGrid(new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f));
             }
 
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
                 movePoint.position += new Vector3(0f, 0f, Input.GetAxisRaw("Vertical"));
+                grid.MoveGrid(new Vector3(Input.GetAxisRaw("Vertical"), 0f, 0f));
             }
         }
     }
