@@ -50,8 +50,8 @@ public class TestingMesh : MonoBehaviour
     private void CreateTileMesh()
     {
 
-        int width = 3;
-        int heigth = 3;
+        int width = 5;
+        int heigth = 5;
         float tileSize = 1;
 
         mat = GetComponent<Renderer>().materials;

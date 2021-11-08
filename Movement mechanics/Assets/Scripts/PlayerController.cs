@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
         originOffSet = new Vector3(-1.5f,-0.5f,-1.5f) + transform.position;
         grid = new Grid(3, 3, 1f, originOffSet);
+
     }
 
     // Update is called once per frame
